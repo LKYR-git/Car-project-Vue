@@ -12,6 +12,7 @@
               <img src="http://localhost:8080/src/assets/banner@3x.png" alt="">
               <p>已有<span>22222</span>个用户在车轮补驾照成功</p>
           </div>
+          <Upload/>
           <div class="countList">
               <ul>
                   <li><p>服务类型</p><p>换驾照<span>></span></p></li>
@@ -20,10 +21,9 @@
                   <li><p>服务费</p><p>￥399</p></li>
                   <li><p>优惠</p><p><span>></span></p></li>
               </ul>
-              
           </div>
           <div class="countQustion">
-                  <a href="javascript:(0)">常见问题?</a>
+            <a href="javascript:(0)">常见问题?</a>
         </div>
       </div>
       <div class="footer">
@@ -36,33 +36,33 @@
 </template>
 
 <script>
-const JSBridge = require('./utils/JSBrige.js');
-
+import chelunJSBridge from '../utils/JSBrige.js';
+import Upload from '../component/upload.vue';
 export default {
   name: 'app',
   data () {
     return {
+      
     }
   },
+  components: {
+    Upload
+  },
   methods: {
-    login(){
-      //登录
-      chelunJSBridge.invoke('app', 'login', {
-        loginCallBackName: res=>{
-          console.log('res...', res);
-        }
-      });
-    }
+    // login(){
+    //   //登录
+    //   chelunJSBridge.invoke('app', 'login', {
+    //     loginCallBackName: res=>{
+    //       console.log('res...', res);
+    //     }
+    //   });
+    // }
   }
 }
 </script>
 
 <style lang="scss" scope>
-    *{
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
+    @import '../scss/commons.scss';
     html,body,.Carwrap{
         width: 100%;
         height: 100%;
