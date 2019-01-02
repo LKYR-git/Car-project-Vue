@@ -102,15 +102,15 @@ export default {
                 z-index: 1;
             }
             .heades::after {
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    border-top: .4rem solid #fff;
-                    border-bottom: .4rem solid #fff;
-                    border-left: .15rem solid #ccc;
-                    top: 0;
-                    right: -.15rem;
-                    z-index: 1;
+                content: '';
+                display: block;
+                position: absolute;
+                border-top: .4rem solid #fff;
+                border-bottom: .4rem solid #fff;
+                border-left: .15rem solid #ccc;
+                top: 0;
+                right: -.15rem;
+                z-index: 1;
             }
 
         }
