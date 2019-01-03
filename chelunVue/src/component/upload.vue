@@ -3,7 +3,7 @@
         <ul>
             <li v-for="(item,index) in list" :key="index" @click="click(index)">
                 <img v-if="item.src" :src="item.src"/>
-                <img v-else :src="addImg">
+                <img v-else class="add" :src="addImg">
                 <p>{{item.desc}}</p>
             </li>
         </ul>
@@ -77,9 +77,26 @@ export default {
             height: 100%;
             display: flex;
             li{
-                flex: 1;
-                padding: 15px 0;
-                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                img{
+                    border-radius: .15rem;
+                    width: .9rem;
+                    height: .7rem;
+                    border: 1px solid #c0c0c0;
+                }
+                p{
+                    font-size: .26rem;
+                    padding: .1rem .3rem;
+                    text-align: center;
+                }
+            }
+            .add{
+                width: .5rem;
+                height: .5rem;
+                padding: .1rem .2rem;
             }
         }
         .marsk{

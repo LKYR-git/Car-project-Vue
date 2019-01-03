@@ -10,12 +10,10 @@ import echarts from 'echarts'
 Vue.prototype.$echarts = echarts;
 
 //引入vant
-//import vant from 'vant';
-// import 'vant/lib/index.css';
-// import { Popup } from 'vant';
-//console.log(Vant)
-//Vue.use(vant);
-//Vue.use(Popup);
+import { Popup,Picker, } from 'vant';
+
+Vue.use(Popup);
+Vue.use(Picker);
 
 //引入路由
 import router from './routes/index';
