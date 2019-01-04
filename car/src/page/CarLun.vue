@@ -15,15 +15,18 @@
           <Upload/>
           <div class="countList">
               <ul>
-                  <TypeChange/>
-                  <li><p>当前驾照签发城市<span></span></p><p><input @click="showCity"  placeholder="请选择签发地"/>{{info.city.join(' ')}}</p></li>
+                  <li><p>服务类型</p><p @click="showChange">{{info.type}}<span>></span></p></li>
+                  <li><p>当前驾照签发城市<span></span></p><p><input @click="showCity" placeholder="请选择签发地"/>{{info.city.join(' ')}}</p></li>
                   <li><p>可补还的签发城市</p><p><input placeholder="请选择补还地"/></p></li>
                   <li><p>服务费</p><p>￥399</p></li>
                   <li><p>优惠</p><p><span>></span></p></li>
               </ul>
+                <van-popup v-model="showType" position="bottom" overlay>
+                   <van-picker :columns="typeArray" @cancel="onCancel" show-toolbar title="请选择服务类型" @confirm="onConfirm"/>
+                </van-popup>
+
                 <van-popup v-model="ShowCity" position="bottom" :overlay="true">
-                    <van-picker :columns="cityArray" @change="cityChange" ref="cityPicker" 
-                     @cancel="onCancel" show-toolbar title="请选择签发城市" @confirm="cityConfirm"/>
+                    <van-picker :columns="cityArray" @change="cityChange" ref="cityPicker" @cancel="onCancel" show-toolbar title="请选择签发城市" @confirm="cityConfirm"/>
                 </van-popup>
           </div>
           <div class="countQustion">
@@ -42,7 +45,6 @@
 <script>
 import chelunJSBridge from '../utils/JSBrige.js';
 import Upload from '../component/upload.vue';
-import TypeChange from '../component/TypeChang.vue';
 import {cityList,costList} from '../api/index.js';
 export default {
   name: 'app',
@@ -64,7 +66,7 @@ export default {
       this.getCityList()
   },
   components: {
-    Upload,TypeChange
+    Upload
   },
   methods: {
     //城市
@@ -99,9 +101,20 @@ export default {
     showCity(){
         this.ShowCity = true;
     },
+
+    //换补驾照
+    showChange(){
+        this.showType=true;
+    },
     onCancel(){
+        this.showType=false;
         this.ShowCity = false;
-    }
+    },
+    onConfirm(value){
+        console.log('values...',value);
+        this.info.type=value;
+        this.onCancel();
+    },
 
     
   }
