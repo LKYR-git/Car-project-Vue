@@ -19,7 +19,7 @@
                     <div>研究报告</div>
                 </div>
             </nav>
-        <div id="myChart" :style="{width: '600px', height: '500px'}"></div>
+            <Content/>
         </div>
         <div class="footer">
                 底部
@@ -27,106 +27,11 @@
     </div>
 </template>
 <script>
+import Content from '../component/Content.vue'
 export default {
-    mounted(){
-       this.drawLine();
-    },
-  methods: {
-    drawLine(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = this.$echarts.init(document.getElementById('myChart'))
-        // 绘制图表
-        myChart.setOption({
-            title: { text: '关注指数' },
-            tooltip: {
-        trigger: 'axis'
-    },
-    legend: {
-        data:['本田CR-V','缤智','途观','吉利博越','冠道','奔驰GLA级','汉兰达','奥迪Q3','本田XR-V','哈弗H6']
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    toolbox: {
-        feature: {
-            saveAsImage: {}
-        }
-    },
-    xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['Nov/17','Jan/18','Mar/18','May/18','Jul/18','Sep/18']
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            name:'本田CR-V',
-            type:'line',
-            stack: '总量',
-            data:[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name:'缤智',
-            type:'line',
-            stack: '总量',
-            data:[220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-            name:'途观',
-            type:'line',
-            stack: '总量',
-            data:[150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-            name:'吉利博越',
-            type:'line',
-            stack: '总量',
-            data:[320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-            name:'冠道',
-            type:'line',
-            stack: '总量',
-            data:[820, 932, 901, 934, 1290, 1330, 1320]
-        },{
-            name:'奔驰GLA级',
-            type:'line',
-            stack: '总量',
-            data:[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name:'汉兰达',
-            type:'line',
-            stack: '总量',
-            data:[220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-            name:'奥迪Q3',
-            type:'line',
-            stack: '总量',
-            data:[150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-            name:'本田XR-V',
-            type:'line',
-            stack: '总量',
-            data:[320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-            name:'哈弗H6',
-            type:'line',
-            stack: '总量',
-            data:[820, 932, 901, 934, 1290, 1330, 1320]
-        }
-    ]
-        });
-    }
-  }
+   components:{
+       Content
+   }
 }
 </script>
 <style lang="scss"> 
@@ -194,6 +99,7 @@ export default {
         }
         .content{
            flex: 1;
+           overflow-y: auto;
             .bannerCommon{
                 width:100%;
                 height: auto;
@@ -215,6 +121,7 @@ export default {
                     text-align: center;
                 }
             }
+           
         }
         .footer{
             width: 100%;

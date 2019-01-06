@@ -1,6 +1,7 @@
 import Vue from 'vue'
-import App from './page/CarLun.vue'
-//import App from './CLDataPc.vue'
+
+//import App from './page/CarLun.vue'
+import App from './page/CLDataPc.vue'
 
 // 引入vuex的实例store
 import store from './store/index';
