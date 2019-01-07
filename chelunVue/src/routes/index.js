@@ -3,13 +3,17 @@
  import Vue from 'vue';
 
  Vue.use(VueRouter);
-import CarLun from '../page/CarLun.vue';
+import CarLun from '../page/modileCarLun/CarLun.vue';
+import Adress from '../page/modileCarLun/getAdress.vue';
  const router = new VueRouter({
      routes:[
          {
              path:'/index',
              component:CarLun
          },{
+            path:'/getAdress',
+            component:Adress
+        },{
              path:'*',
              redirect:'/index'
          }

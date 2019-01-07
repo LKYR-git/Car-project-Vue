@@ -4,7 +4,9 @@
     <span>{{num}}</span>
     <button @click="changeNum('-')">-</button>
     <span>千分符：{{formatNum}}</span>
+    <router-view></router-view>
   </div>
+  
 </template>
 <script>
 import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';

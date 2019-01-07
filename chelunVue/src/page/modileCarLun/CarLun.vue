@@ -7,24 +7,23 @@
           <div class="heades">正在办理</div>
           <div>办理完成</div>
       </div>
+      
       <div class="count">
           <div class="banner">
               <img src="http://localhost:8080/src/assets/banner@3x.png" alt="">
               <p>已有<span>26576</span>个用户在车轮补驾照成功</p>
           </div>
+          <!-- 上传图片 -->
           <Upload/>
+          <!--选择城市 -->
           <div class="countList">
               <ul>
                   <TypeChange/>
-                  <li><p>当前驾照签发城市<span></span></p><p><input @click="showCity"  placeholder="请选择签发地"/>{{info.city.join(' ')}}</p></li>
-                  <li><p>可补还的签发城市</p><p><input placeholder="请选择补还地"/></p></li>
+                  <CityType/>
                   <li><p>服务费</p><p>￥399</p></li>
                   <li><p>优惠</p><p><span>></span></p></li>
               </ul>
-                <van-popup v-model="ShowCity" position="bottom" :overlay="true">
-                    <van-picker :columns="cityArray" @change="cityChange" ref="cityPicker" 
-                     @cancel="onCancel" show-toolbar title="请选择签发城市" @confirm="cityConfirm"/>
-                </van-popup>
+                
           </div>
           <div class="countQustion">
             <a href="javascript:(0)">常见问题?</a>
@@ -40,76 +39,24 @@
 </template>
 
 <script>
-import chelunJSBridge from '../utils/JSBrige.js';
-import Upload from '../component/upload.vue';
-import TypeChange from '../component/TypeChang.vue';
-import {cityList,costList} from '../api/index.js';
+import chelunJSBridge from '../../utils/JSBrige.js';
+import Upload from '../../component/upload.vue';
+import TypeChange from '../../component/TypeChang.vue';
+import CityType from '../../component/CityType.vue'
 export default {
   name: 'app',
   data () {
     return {
-      showType:false,
-      ShowCity:false,
-      typeArray:['换驾照','补驾照'],
-     // 签发城市
-      cityList: [],
-      cityArray: [],
-      info: {
-        type: '',
-        city: []
-      }
     }
-  },
-  created(){
-      this.getCityList()
   },
   components: {
-    Upload,TypeChange
-  },
-  methods: {
-    //城市
-    async getCityList(){
-        let res = await cityList();
-        res.data.forEach((item,index)=>{
-            item.list.forEach(items=>{
-                delete items.list;
-            })
-        })
-
-      console.log('res...',res);
-      this.cityList = res.data;
-      this.cityArray = [{
-        values: this.cityList.map(item=>item.name)
-      }, {
-        values: this.cityList[0].list.map(item=>item.name)
-      }]
-    },cityChange(picker, values){
-      let index = this.cityList.findIndex(item=>item.name == values[0]);
-      this.cityArray[1].values = this.cityList[index].list.map(item=>item.name)
-      // console.log('picker...', picker, values, this.cityArray, this.$refs.cityPicker, this.cityList[index].list.map(item=>item.name));
-      this.$refs.cityPicker.setColumnValues(1,  this.cityList[index].list.map(item=>item.name))
-    },
-    cityConfirm(values){
-      this.info.city = values;
-      this.ShowCity = false;
-    },
-    clickCity(){
-      this.ShowCity = true;
-    },
-    showCity(){
-        this.ShowCity = true;
-    },
-    onCancel(){
-        this.ShowCity = false;
-    }
-
-    
+    Upload,TypeChange,CityType
   }
 }
 </script>
 
 <style lang="scss" scope>
-    @import '../scss/commons.scss';
+    @import '../../scss/commons.scss';
     html,body,.Carwrap{
         width: 100%;
         height: 100%;
@@ -209,29 +156,8 @@ export default {
                     li:nth-child(5){
                         border: none;
                     }
-                    li:nth-child(3){
-                        text-align: right;
-                        p:nth-child(2){
-                            input{
-                                border: none;
-                                width: 52%;
-                                height: 40%;
-                                text-align:right;
-                            }
-                           
-                        }
-                    }
-                    li:nth-child(2){
-                        p:nth-child(2){
-                            text-align: right;
-                            input{
-                                border: none;
-                                width: 52%;
-                                height: 40%;
-                                text-align:right;
-                            }
-                        }
-                    }
+                    
+                    
                     li:nth-child(4){
                         //border-bottom: .5rem solid #eee;
                         p:nth-child(2){
