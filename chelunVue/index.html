@@ -31,9 +31,6 @@
   </script>
   <!-- 引入移动端调试工具 -->
   <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>
-      eruda.init();
-  </script>
   <!-- 客服小姐姐 -->
   <script>
     (function (a, h, c, b, f, g) {
@@ -78,6 +75,11 @@
       }
     })
   </script>
+  <script>
+    eruda.init();
+    //禁用客户端右上角的功能按钮
+    window['CHELUN_SHOW_MENU_ITEMS'] = ['menu:refresh', 'menu:share:wxMessage', 'menu:share:wxTimeline'];
+</script>
   <style>
     body {
       font-size: .28rem;

@@ -1,7 +1,7 @@
 <template>
   <div>
-      <li><p>当前驾照签发城市<span></span></p><p><input @click="cityClick"  placeholder="请选择签发地"/>{{city.join(' ')}}</p></li>
-      <li><p>可补还的签发城市</p><p><input @click="costClick" placeholder="请选择补还地"/>{{cost.join(' ')}}</p></li>
+      <li><p>当前驾照签发城市<span></span></p><p><input v-if="ShowChange" @click="cityClick"  placeholder="请选择签发地"/> <span v-else @click="cityClick">{{city.join(' ')}}</span> </p></li>
+      <li><p>可补还的签发城市</p><p><input v-if="ShowChanges" @click="costClick" placeholder="请选择补还地"/> <span v-else @click="costClick">{{cost.join(' ') | filterCity(/\(签发地\)/g)}}</span> </p></li>
       <van-popup v-model="showCity" position="bottom">
         <van-picker :columns="cityColumns" show-toolbar title="选择签发城市"
           ref="cityPicker" @change="cityChange" @cancel="cityCancel" @confirm="cityConfirm"/>
@@ -18,6 +18,9 @@ export default {
   name: 'CityPicker',
   data(){
     return {
+      //切换
+      ShowChange:true,
+      ShowChanges:true,
       // 控制当前驾照
       showCity: false,
       // 控制可补换驾照
@@ -60,6 +63,7 @@ export default {
     // 显示选择器
     cityClick(){
       this.showCity = true;
+      this.ShowChange=false;
     },
     // 当省份改变的时候更新城市数据
     cityChange(picker, values){
@@ -78,6 +82,7 @@ export default {
       this.cityCancel();
     },
     async costClick(){
+      this.ShowChanges=false;
       if (!this.city.length){
         alert('请选择签发城市');
       }else{

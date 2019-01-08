@@ -1,6 +1,6 @@
 <template>
   <div>
-        <li><p>服务类型</p><p @click="showChange">{{type}}<span>></span></p></li>
+        <li><p>服务类型</p><p><span v-if="showChang" @click="showChange">换驾照</span><span v-else>{{type}}</span><span>></span></p></li>
         <van-popup v-model="showType" position="bottom" overlay>
             <van-picker :columns="typeArray" @cancel="onCancel" show-toolbar title="请选择服务类型" @confirm="onConfirm"/>
         </van-popup>
@@ -11,6 +11,7 @@ export default {
     data(){
         return{
             showType:false,
+            showChang:true,
             typeArray:['换驾照','补驾照'],
             type: '',
         }
@@ -19,6 +20,7 @@ export default {
         //换补驾照
         showChange(){
             this.showType=true;
+            this.showChang=false;
         },
         onCancel(){
             this.showType=false;

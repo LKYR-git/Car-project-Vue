@@ -23,17 +23,24 @@
                   <li><p>服务费</p><p>￥399</p></li>
                   <li><p>优惠</p><p><span>></span></p></li>
               </ul>
-                
           </div>
           <div class="countQustion">
-            <a href="javascript:(0)">常见问题?</a>
+            <router-link to='/faq'>常见问题?</router-link>
         </div>
+         <div class="share">
+                <router-link to="/getAdress">分享页</router-link>
+          </div>
       </div>
       <div class="footer">
           <div class="left">
               <p>实付：<span>￥399</span></p>
           </div>
-          <div class="right">立即支付</div>
+          <div class="right">
+              <p @click="pay">立即支付</p>
+          </div>
+      </div>
+      <div id="cc">
+          <img  src="http://localhost:8080/src/assets/cc-icon.png" alt="">
       </div>
   </div>
 </template>
@@ -42,12 +49,18 @@
 import chelunJSBridge from '../../utils/JSBrige.js';
 import Upload from '../../component/upload.vue';
 import TypeChange from '../../component/TypeChang.vue';
-import CityType from '../../component/CityType.vue'
+import CityType from '../../component/CityType.vue';
+import {doPay} from '../../api/index.js';
 export default {
   name: 'app',
   data () {
     return {
     }
+  },
+  methods:{
+      pay(){
+          doPay();
+      }
   },
   components: {
     Upload,TypeChange,CityType
@@ -65,6 +78,7 @@ export default {
     .Carwrap{
         display: flex;
         flex-direction: column;
+        position: relative;
         .header{
             width: 100%;
             height: 40px;
@@ -181,6 +195,12 @@ export default {
                 line-height: 20px;
                 text-align: center;
             }
+            .share{
+                width: 100%;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+            }
         }
         .footer{
             width: 100%;
@@ -209,6 +229,17 @@ export default {
                 text-align: center;
                 font-weight: bold;
                 font-size: .3rem;
+            }
+        }
+        #cc{
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            right: .5rem;
+            bottom: 1rem;
+            img{
+                width: 100%;
+                height: 100%;
             }
         }
     }

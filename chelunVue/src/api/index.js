@@ -11,7 +11,20 @@ export let uploadImg = (type)=>{
       })
     })
   }
-
+//吊起支付
+export let doPay = () =>{
+  JSBridge.invoke('app', 'pay', {
+    price: 398.00,
+    orderNum: '6486849305969374209',
+    channels: ["weixin","alipay","baidu"],
+    callbackUrl: "https://h5.chelun.com/2017/update-licence2/order.html"
+  });
+}
+//吊起朋友圈 好友分享
+export let shareDown =()=>{
+  JSBridge.invoke('ui','shareMessage');
+}
+//驾照的请求方式
 function sendRequest(url, method = 'GET', data = {}) {
     let params = {
         method
@@ -31,9 +44,6 @@ function sendRequest(url, method = 'GET', data = {}) {
     return fetch(url, params)
       .then(res => res.json()).then(body=>body);
 }
-
-
-
 // 获取驾照签发城市
 export let cityList = ()=>{
     return sendRequest('/api/ExchangeJiaZhao/cityList');

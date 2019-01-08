@@ -1,10 +1,10 @@
  import VueRouter from 'vue-router';
-
  import Vue from 'vue';
-
  Vue.use(VueRouter);
+
 import CarLun from '../page/modileCarLun/CarLun.vue';
 import Adress from '../page/modileCarLun/getAdress.vue';
+import FaqPage from '../page/modileCarLun/Faq.vue';
  const router = new VueRouter({
      routes:[
          {
@@ -13,6 +13,9 @@ import Adress from '../page/modileCarLun/getAdress.vue';
          },{
             path:'/getAdress',
             component:Adress
+        },{
+            path:'/faq',
+            component:FaqPage
         },{
              path:'*',
              redirect:'/index'
@@ -24,10 +27,10 @@ import Adress from '../page/modileCarLun/getAdress.vue';
 router.beforeEach((to, from, next)=>{
     console.log('1111');
     next();
-  })
+})
   
-  router.afterEach((to, from, next)=>{
+router.afterEach((to, from, next)=>{
   
-  })
+})
   
  export default router;
