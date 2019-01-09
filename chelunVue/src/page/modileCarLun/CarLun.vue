@@ -30,6 +30,9 @@
          <div class="share">
                 <router-link to="/getAdress">分享页</router-link>
           </div>
+          
+        
+
       </div>
       <div class="footer">
           <div class="left">
@@ -60,7 +63,8 @@ export default {
   methods:{
       pay(){
           doPay();
-      }
+      },
+      
   },
   components: {
     Upload,TypeChange,CityType

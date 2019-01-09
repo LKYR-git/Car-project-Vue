@@ -1,5 +1,9 @@
-// const host = /localhost/.test(window.location.host)?'http://123.206.55.50:14000':'http://123.206.55.50:14000';
+
 import JSBridge from '../utils/JSBrige.js';
+//接口调用配置
+//const host = /localhost/.test(window.location.host)?'http://123.206.55.50:11000':'http://123.206.55.50:11000';
+
+
 //上传图片
 export let uploadImg = (type)=>{
     return new Promise((resolve, reject)=>{
@@ -24,10 +28,15 @@ export let doPay = () =>{
 export let shareDown =()=>{
   JSBridge.invoke('ui','shareMessage');
 }
-//驾照的请求方式
+
+
+//sendRequest请求方式
 function sendRequest(url, method = 'GET', data = {}) {
     let params = {
-        method
+        method,
+        headers: {
+          'content-type': 'application/json'
+        }
     };
     // 判断如果是一个post请求，带上请求体信息
     if (method == 'POST') {
@@ -44,10 +53,19 @@ function sendRequest(url, method = 'GET', data = {}) {
     return fetch(url, params)
       .then(res => res.json()).then(body=>body);
 }
+
+// 上传base64
+export let uploadBase64 = (base64)=>{
+  return sendRequest('http://123.206.55.50:11000/upload_base64', 'POST', {base64})
+}
+// 图片转成base64
+export let imgToBase64 = (urls)=>{
+  return sendRequest('http://123.206.55.50:11000/tobase64', 'POST', {url:urls})
+}
 // 获取驾照签发城市
 export let cityList = ()=>{
     return sendRequest('/api/ExchangeJiaZhao/cityList');
-  }
+}
   
   // 获取可补换城市
   export let costList = (...params)=>{
